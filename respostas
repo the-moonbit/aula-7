@@ -1,0 +1,37 @@
+1- A diferença central é que microsserviços são uma forma de arquitetar o software,
+enquanto contêineres são uma tecnologia de empacotamento e execução usada para rodar aplicações (incluindo microsserviços).
+
+Microsserviços dividem um sistema grande em serviços pequenos, independentes e focados em um domínio específico
+(por exemplo, um serviço de pedidos, outro de pagamentos e outro de catálogo).
+Cada um pode ter seu próprio banco de dados e ciclo de deploy independente.
+
+Containeres isolam a aplicação junto com suas dependências (como a JVM, bibliotecas e variáveis de ambiente) em um pacote
+leve e padronizado (muito comum usar Docker no ecossistema Java, como Spring Boot ou Quarkus).
+Assim, o mesmo artefato roda de forma previsível na sua máquina e em qualquer servidor.
+
+EXTRA: Sim, é possível subir microsserviços em uma máquina virtual.
+Uma máquina virtual fornece um sistema operacional completo e recursos computacionais onde você pode instalar o runtime
+necessário (como o Java/JDK) e executar seus serviços diretamente nela (por exemplo, rodando vários .jar ou serviços systemd
+em portas diferentes) ou até mesmo rodar um motor de contêineres dentro da VM.
+Microsserviços definem como o código e as responsabilidades do sistema são separados, não o tipo de infraestrutura subjacente.
+
+-------------------------------------------------------------------
+
+2- A Integração Contínua depende de validar constantemente que o trabalho de todo o time funciona em conjunto na branch principal.
+Quando os desenvolvedores fazem merge com frequência o merge hell é evitaado, as quebras são detectadas mais cedo e o feedback é
+bem mais rápido.
+
+-------------------------------------------------------------------
+
+3- Na Entrega Contínua, o objetivo é que o código esteja sempre em um estado pronto para ir para produção.
+Sem uma cobertura de testes sólida não há confiança pra releases, o risco de regressão por conta de quebras no sistema 
+aumenta e faz com que sejam necessários testes manuais que atrapalham o fluxo.
+
+-------------------------------------------------------------------
+
+4- A principal diferença está na forma como o código chega a produção e na presença de uma aprovação humana nessa etapa final.
+Na entrega contínua, o pipeline automatiza o build e os testes para garantir que o código esteja sempre validado e pronto para
+ir para produção a qualquer momento, as a publicação efetiva em produção costuma depender de uma decisão ou aprovação manual
+(por exemplo, escolher o melhor momento para o negócio lançar uma funcionalidade). Já na implantação contínua,
+não há aprovação manual para o deploy: toda alteração aprovada nos testes automatizados segue direto e automaticamente para
+produção, o que exige um nível ainda maior de automação, confiança nos testes e observabilidade/monitoramento.
